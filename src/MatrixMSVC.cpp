@@ -568,8 +568,8 @@ namespace VML
 		F32 c = cosf(angle);
 
 		_declspec(align(16)) F32 col0[4] = { 1.0f, 0.0f, 0.0f, 0.0f };
-		_declspec(align(16)) F32 col1[4] = { 0.0f,    c,   -s, 0.0f };
-		_declspec(align(16)) F32 col2[4] = { 0.0f,    s,    c, 0.0f };
+		_declspec(align(16)) F32 col1[4] = { 0.0f,    c,    s, 0.0f };
+		_declspec(align(16)) F32 col2[4] = { 0.0f,   -s,    c, 0.0f };
 		_declspec(align(16)) F32 col3[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
 
 		mRot.m_cols[0] = _mm_load_ps(col0);
@@ -587,9 +587,9 @@ namespace VML
 		F32 s = sinf(angle);
 		F32 c = cosf(angle);
 
-		_declspec(align(16)) F32 col0[4] = { c, 0.0f,    s, 0.0f };
+		_declspec(align(16)) F32 col0[4] = { c,    0.0f,   -s, 0.0f };
 		_declspec(align(16)) F32 col1[4] = { 0.0f, 1.0f, 0.0f, 0.0f };
-		_declspec(align(16)) F32 col2[4] = { -s, 0.0f,    c, 0.0f };
+		_declspec(align(16)) F32 col2[4] = { s,    0.0f,    c, 0.0f };
 		_declspec(align(16)) F32 col3[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
 
 		mRot.m_cols[0] = _mm_load_ps(col0);
@@ -607,8 +607,8 @@ namespace VML
 		F32 s = sinf(angle);
 		F32 c = cosf(angle);
 
-		_declspec(align(16)) F32 col0[4] = { c,   -s, 0.0f, 0.0f };
-		_declspec(align(16)) F32 col1[4] = { s,    c, 0.0f, 0.0f };
+		_declspec(align(16)) F32 col0[4] = { c,    s,    0.0f, 0.0f };
+		_declspec(align(16)) F32 col1[4] = {-s,    c,    0.0f, 0.0f };
 		_declspec(align(16)) F32 col2[4] = { 0.0f, 0.0f, 1.0f, 0.0f };
 		_declspec(align(16)) F32 col3[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
 
@@ -660,9 +660,9 @@ namespace VML
 		F32 sY = sinf(y);
 		F32 sZ = sinf(z);
 
-		VML_ALIGN_MS(16) F32 col0[4] VML_ALIGN_GCC(16) = { cY * cX, cY * sX, -sY, 0.0f };
-		VML_ALIGN_MS(16) F32 col1[4] VML_ALIGN_GCC(16) = { -(cZ * sX) + (sZ * sY * cX), (cZ * cX) + (sZ * sY * sX), sZ * cY, 0.0f };
-		VML_ALIGN_MS(16) F32 col2[4] VML_ALIGN_GCC(16) = { (sZ * sX) + (cZ * sY * cX), -(sZ * cY) + (cZ * sY * sX), cZ * cY, 0.0f };
+		VML_ALIGN_MS(16) F32 col0[4] VML_ALIGN_GCC(16) = { cZ * cY, sZ * cY, -sY, 0.0f };
+		VML_ALIGN_MS(16) F32 col1[4] VML_ALIGN_GCC(16) = { (cZ * sY * sX) - (sZ * cX), (sZ * sY * sX) + (cZ * cX), cY * sX, 0.0f };
+		VML_ALIGN_MS(16) F32 col2[4] VML_ALIGN_GCC(16) = { (cZ * sY * cX) + (sZ * sX), (sZ * sY * cX) - (cZ * sX), cY * cX, 0.0f };
 		VML_ALIGN_MS(16) F32 col3[4] VML_ALIGN_GCC(16) = { 0.0f, 0.0f, 0.0f, 1.0f };
 
 		m.m_cols[0] = _mm_load_ps(col0);
